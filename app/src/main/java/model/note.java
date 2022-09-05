@@ -10,29 +10,27 @@ import java.util.Date;
  *
  * @author Feu's m15 R6
  */
-public class note {
+public class Note {
     
     // definindo atributos
     
     private int id;
     private int idProject;
     private String name;
-    private String description;
-    private String notes;
-    private boolean isCompleted;
+    private String note;
+    private boolean Completed;
     private Date deadline;
     private Date createdAt;
     private Date modifiedAt;
     
     // construtor
 
-    public note(int id, int idProject, String name, String description, String notes, boolean isCompleted, Date deadline, Date createdAt, Date modifiedAt) {
+    public Note(int id, int idProject, String name, String note, boolean Completed, Date deadline, Date createdAt, Date modifiedAt) {
         this.id = id;
         this.idProject = idProject;
         this.name = name;
-        this.description = description;
-        this.notes = notes;
-        this.isCompleted = isCompleted;
+        this.note = note;
+        this.Completed = Completed;
         this.deadline = deadline;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
@@ -64,28 +62,20 @@ public class note {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getNote() {
+        return note;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setNote(String description) {
+        this.note = description;
+    }
+    
+    public boolean isCompleted() {
+        return Completed;
     }
 
-    public String getNotes() {
-        return notes;
-    }
-
-    public void setNotes(String notes) {
-        this.notes = notes;
-    }
-
-    public boolean isIsCompleted() {
-        return isCompleted;
-    }
-
-    public void setIsCompleted(boolean isCompleted) {
-        this.isCompleted = isCompleted;
+    public void setCompleted(boolean isCompleted) {
+        this.Completed = isCompleted;
     }
 
     public Date getDeadline() {
@@ -114,8 +104,9 @@ public class note {
 
     @Override
     public String toString() {
-        return "note{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", isCompleted=" + isCompleted + ", deadline=" + deadline + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + '}';
+        return "Note{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", note=" + note + ", Completed=" + Completed + ", deadline=" + deadline + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + '}';
     }
+
     
     
     
