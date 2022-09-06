@@ -38,8 +38,11 @@ public class NoteController {
             statement.setDate(7, new Date(note.getModifiedAt().getTime()));
             statement.execute();
                     
-        } catch (Exception e) {
+        } catch (Exception ex) {
             throw new RuntimeException("Erro ao salvar a nota " + ex.getMessage(), ex);
+        } finally {
+            ConnectionFactory.closeConnection(c, statement);
+       
         }
         
     };
@@ -63,7 +66,7 @@ public class NoteController {
         } catch (SQLException e) {
             throw new SQLException("Erro ao deletar a nota");
         } finally {
-            ConnectionFactory.closeConnection(c);
+            ConnectionFactory.closeConnection(c, statement);
         }
     }
     
