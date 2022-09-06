@@ -36,6 +36,10 @@ public class Note {
         this.modifiedAt = modifiedAt;
     }
     
+    public Note (){
+        this.createdAt = new Date();
+    }
+    
     // getters and setters
 
     public int getId() {

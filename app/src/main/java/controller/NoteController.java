@@ -33,10 +33,13 @@ public class NoteController {
             statement.setString(2, note.getName());
             statement.setString(3, note.getNote());
             statement.setBoolean(4, note.isCompleted());
-            statement.setDate(4, new Date(note.getCreatedAt().getTime()));
+            statement.setDate(5, new Date(note.getDeadline().getTime()));
+            statement.setDate(6, new Date(note.getCreatedAt().getTime()));
+            statement.setDate(7, new Date(note.getModifiedAt().getTime()));
+            statement.execute();
                     
         } catch (Exception e) {
-            
+            throw new RuntimeException("Erro ao salvar a nota " + ex.getMessage(), ex);
         }
         
     };
