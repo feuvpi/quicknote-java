@@ -63,8 +63,8 @@ public class NoteController {
             statement.setInt(1, noteId);
             statement.execute();
             
-        } catch (SQLException e) {
-            throw new SQLException("Erro ao deletar a nota");
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao deletar a nota" + ex.getMessage(), ex);
         } finally {
             ConnectionFactory.closeConnection(c, statement);
         }
