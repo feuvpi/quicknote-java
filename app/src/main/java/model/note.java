@@ -70,8 +70,8 @@ public class Note {
         return note;
     }
 
-    public void setNote(String description) {
-        this.note = description;
+    public void setNote(String note) {
+        this.note = note;
     }
     
     public boolean isCompleted() {

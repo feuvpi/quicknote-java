@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author Feu's m15 R6
  */
-public class project {
+public class Project {
     
     // definindo atributos
     
@@ -22,12 +22,16 @@ public class project {
     
     // gerando construtor
 
-    public project(int id, String name, String description, Date createdAt, Date modifiedAt) {
+    public Project(int id, String name, String description, Date createdAt, Date modifiedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
+    }
+    
+    public Project() {
+  
     }
     
     // getters and setters 

@@ -29,8 +29,14 @@ public class NoteController {
         PreparedStatement statement = null;
         
         try {
+            
+            //estabelecimento de conexão com banco de dados
             c = ConnectionFactory.getConnection();
+            
+            //preparando query
             statement = c.prepareStatement(sql);
+            
+            //setando os valores da query
             statement.setInt(1, note.getIdProject());
             statement.setString(2, note.getName());
             statement.setString(3, note.getNote());
@@ -38,6 +44,8 @@ public class NoteController {
             statement.setDate(5, new Date(note.getDeadline().getTime()));
             statement.setDate(6, new Date(note.getCreatedAt().getTime()));
             statement.setDate(7, new Date(note.getModifiedAt().getTime()));
+            
+            //executando a query 
             statement.execute();
                     
         } catch (Exception ex) {
@@ -65,8 +73,13 @@ public class NoteController {
         PreparedStatement statement = null;
         
         try {
+            //estabelecendo conexão com banco de dados
             c = ConnectionFactory.getConnection();
+            
+            //preparando a query
             statement = c.prepareStatement(sql);
+            
+            //setando valores do statement
             statement.setInt(1, note.getIdProject());
             statement.setString(2, note.getName());
             statement.setString(3, note.getNote());
@@ -74,6 +87,8 @@ public class NoteController {
             statement.setDate(5, new Date(note.getDeadline().getTime()));
             statement.setDate(6, new Date(note.getModifiedAt().getTime()));
             statement.setInt(7, note.getId());
+            
+            //executando a query
             statement.execute();
                     
         } catch (Exception ex) {
@@ -111,21 +126,56 @@ public class NoteController {
         Connection c = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
+        
+        //Lista de tarefas a ser retornada 
         List<Note> notes = new ArrayList<Note>();
         
         try {
+            
+            //estabelecendo a conexão
             c = ConnectionFactory.getConnection();
+            
+            //preparando query
             statement = c.prepareStatement(sql);
+            
+            //setando os valores da query
             statement.setInt(1, idProject);
-            statement.execute();
+            
+            //executando a query e retornando para uma variavel
+            resultSet = statement.executeQuery();
+            
+            //enquanto houverem valores a serem percorridos no resultSet
+            while(resultSet.next()){
+                
+                //criando uma nova note
+                Note note = new Note();
+                
+                //setando os valores da note
+                note.setId(resultSet.getInt("id"));
+                note.setIdProject(resultSet.getInt("idProject"));
+                note.setIdProject(resultSet.getInt("idProject"));
+                note.setName(resultSet.getString("name"));
+                note.setNote(resultSet.getString("note"));
+                note.setNote(resultSet.getString("note"));
+                note.setCompleted(resultSet.getBoolean("isCompleted"));
+                note.setDeadline(resultSet.getDate("deadline"));
+                note.setCreatedAt(resultSet.getDate("createdAt"));
+                note.setModifiedAt(resultSet.getDate("modifiedAt"));
+                
+                //adicionando note para a lista notes
+                notes.add(note);
+                
+                
+            }
+            
         } catch (Exception ex) {
             throw new RuntimeException("Erro ao carregar notas" + ex.getMessage(), ex);
         } finally {
-            ConnectionFactory.closeConnection(c);
+            ConnectionFactory.closeConnection(c, statement, resultSet);
         }
         
-        
-        return null;
+        // lista de tarefas sendo devolvida após carregamento dos dados
+        return notes;
     }
     
 }

@@ -18,6 +18,8 @@ public class App {
         // iniciar uma conexão com o banco de dados
         Connection connection = ConnectionFactory.getConnection();
         
+        
+        
         // encerrar a conexão com o banco de dados
         closeConnection(connection);
     }
