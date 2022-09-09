@@ -31,7 +31,8 @@ public class Project {
     }
     
     public Project() {
-  
+        this.createdAt = new Date();
+        this.modifiedAt = new Date();
     }
     
     // getters and setters 

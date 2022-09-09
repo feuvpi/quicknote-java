@@ -3,7 +3,11 @@
  */
 package Quicknote;
 
+import controller.ProjectController;
 import java.sql.Connection;
+import java.util.Date;
+import java.util.List;
+import model.Project;
 import util.ConnectionFactory;
 import static util.ConnectionFactory.closeConnection;
 
@@ -13,10 +17,31 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
         
         // iniciar uma conexão com o banco de dados
         Connection connection = ConnectionFactory.getConnection();
+        
+        ProjectController projectController = new ProjectController();
+//        Project project = new Project();
+//        project.setName("Projeto Olá Mundo");
+//        project.setCreatedAt(new Date());
+//        project.setDescription("Projecto criado para testar a aplicação");
+//        projectController.save(project);
+//        System.out.println(project);
+        
+        
+//        project.setName("Novo Nome");
+//        project.setDescription("Nova descrição.");
+//        project.setId(1);
+//        projectController.update(project);
+//        
+        List<Project> projects = projectController.getAll();
+        System.out.println("Total de projetos = " + projects.size());
+        System.out.println(projects);
+                
+                
+        
+        
         
         
         

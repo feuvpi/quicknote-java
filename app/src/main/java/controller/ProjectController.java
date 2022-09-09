@@ -28,8 +28,8 @@ public class ProjectController {
     public void save(Project project){
        String sql = "INSERT into projects (name,"
                + "description,"
-               + "createdAt,"
-               + "modifiedAt) "
+               + "date_creation,"
+               + "date_editing) "
                + "VALUES (?, ?, ?, ?)"; 
        
        Connection c = null;
@@ -50,7 +50,7 @@ public class ProjectController {
            //run sql for data insertion 
            statement.execute();
            
-       } catch(Exception ex){
+       } catch(SQLException ex){
            throw new RuntimeException("Erro ao salvar o projeto!", ex);
        } finally {
            ConnectionFactory.closeConnection(c, statement);
@@ -61,7 +61,8 @@ public class ProjectController {
     
     public void update(Project project){
         String sql = "UPDATE projects SET "
-                + "description = ?,"
+                + "name = ?,"
+                + "description = ?"
                 + "WHERE id = ?";
         Connection c = null;
         PreparedStatement statement = null;
@@ -72,12 +73,13 @@ public class ProjectController {
             // create a preparedStatement, for sql command
             statement = c.prepareStatement(sql);
             statement.setString(1, project.getName());
-            statement.setInt(2, project.getId());
+            statement.setString(2, project.getDescription());
+            statement.setInt(3, project.getId());
             
             //run sql command
             statement.execute();
         } catch (SQLException ex){
-            throw new RuntimeException("Erro ao atualizar a descrição do projeto.", ex);
+            throw new RuntimeException("Erro ao atualizar o projeto do projeto.", ex);
         } finally {
         //close the c connection and the statement
         ConnectionFactory.closeConnection(c, statement);
@@ -123,9 +125,10 @@ public class ProjectController {
             while(resultSet.next()){
                 Project project = new Project();
                 project.setId(resultSet.getInt("id"));
+                project.setName(resultSet.getString("name"));
                 project.setDescription(resultSet.getString("description"));
-                project.setCreatedAt(resultSet.getDate("createdAt"));
-                project.setModifiedAt(resultSet.getDate("modifiedAt"));
+                project.setCreatedAt(resultSet.getDate("date_creation"));
+                project.setModifiedAt(resultSet.getDate("date_editing"));
                 
                 projects.add(project);
             }
