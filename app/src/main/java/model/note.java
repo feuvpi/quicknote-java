@@ -15,23 +15,17 @@ public class Note {
     // definindo atributos
     
     private int id;
-    private int idProject;
-    private String name;
+    private String title;
     private String note;
-    private boolean Completed;
-    private Date deadline;
     private Date createdAt;
     private Date modifiedAt;
     
     // construtor
 
-    public Note(int id, int idProject, String name, String note, boolean Completed, Date deadline, Date createdAt, Date modifiedAt) {
+    public Note(int id, String title, String note, Date createdAt, Date modifiedAt) {
         this.id = id;
-        this.idProject = idProject;
-        this.name = name;
+        this.title = title;
         this.note = note;
-        this.Completed = Completed;
-        this.deadline = deadline;
         this.createdAt = createdAt;
         this.modifiedAt = modifiedAt;
     }
@@ -50,20 +44,12 @@ public class Note {
         this.id = id;
     }
 
-    public int getIdProject() {
-        return idProject;
+    public String getTitle() {
+        return title;
     }
 
-    public void setIdProject(int idProject) {
-        this.idProject = idProject;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getNote() {
@@ -72,22 +58,6 @@ public class Note {
 
     public void setNote(String note) {
         this.note = note;
-    }
-    
-    public boolean isCompleted() {
-        return Completed;
-    }
-
-    public void setCompleted(boolean isCompleted) {
-        this.Completed = isCompleted;
-    }
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
     }
 
     public Date getCreatedAt() {
@@ -108,7 +78,7 @@ public class Note {
 
     @Override
     public String toString() {
-        return "Note{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", note=" + note + ", Completed=" + Completed + ", deadline=" + deadline + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + '}';
+        return "Note{" + "id=" + id + ", title=" + title + ", note=" + note + ", createdAt=" + createdAt + ", modifiedAt=" + modifiedAt + '}';
     }
 
     

@@ -22,8 +22,8 @@ public class NoteController {
     
     public void save(Note note) {
         
-        String sql = "INSERT INTO tasks (idProject, name, note, completed, deadline, date_creation, date_editing) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO notes (idProject, title, note, date_creation, date_editing) "
+                + "VALUES (?, ?, ?, ?, ?)";
         
         Connection c = null;
         PreparedStatement statement = null;
@@ -37,13 +37,10 @@ public class NoteController {
             statement = c.prepareStatement(sql);
             
             //setando os valores da query
-            statement.setInt(1, note.getIdProject());
-            statement.setString(2, note.getName());
+            statement.setString(2, note.getTitle());
             statement.setString(3, note.getNote());
-            statement.setBoolean(4, note.isCompleted());
-            statement.setDate(5, new Date(note.getDeadline().getTime()));
-            statement.setDate(6, new Date(note.getCreatedAt().getTime()));
-            statement.setDate(7, new Date(note.getModifiedAt().getTime()));
+            statement.setDate(5, new Date(note.getCreatedAt().getTime()));
+            statement.setDate(6, new Date(note.getModifiedAt().getTime()));
             
             //executando a query 
             statement.execute();
@@ -60,11 +57,8 @@ public class NoteController {
     public void update (Note note) {
         
         String sql = "UPDATE notes SET "
-                + "idProject = ?, "
-                + "name = ?, "
+                + "title = ?, "
                 + "note = ?, "
-                + "completed = ?, "
-                + "deadline = ?, "
                 + "date_editing = ? "
                 + "WHERE id = ?";
         
@@ -80,13 +74,10 @@ public class NoteController {
             statement = c.prepareStatement(sql);
             
             //setando valores do statement
-            statement.setInt(1, note.getIdProject());
-            statement.setString(2, note.getName());
+            statement.setString(2, note.getTitle());
             statement.setString(3, note.getNote());
-            statement.setBoolean(4, note.isCompleted());
-            statement.setDate(5, new Date(note.getDeadline().getTime()));
-            statement.setDate(6, new Date(note.getModifiedAt().getTime()));
-            statement.setInt(7, note.getId());
+            statement.setDate(4, new Date(note.getModifiedAt().getTime()));
+            statement.setInt(5, note.getId());
             
             //executando a query
             statement.execute();
@@ -101,7 +92,7 @@ public class NoteController {
     }
     
     public void removeById(int noteId) throws SQLException{
-        String sql = "DELETE FROM tasks WHERE id = ?";
+        String sql = "DELETE FROM notes WHERE id = ?";
         
         Connection c = null;
         PreparedStatement statement = null;
@@ -121,7 +112,7 @@ public class NoteController {
     
     public List<Note> getAll(int idProject) {
         
-        String sql = "SELECT * from tasks WHERE idProject = ?";
+        String sql = "SELECT * from notes WHERE idProject = ?";
         
         Connection c = null;
         PreparedStatement statement = null;
@@ -152,13 +143,9 @@ public class NoteController {
                 
                 //setando os valores da note
                 note.setId(resultSet.getInt("id"));
-                note.setIdProject(resultSet.getInt("idProject"));
-                note.setIdProject(resultSet.getInt("idProject"));
-                note.setName(resultSet.getString("name"));
+                note.setTitle(resultSet.getString("name"));
                 note.setNote(resultSet.getString("note"));
                 note.setNote(resultSet.getString("note"));
-                note.setCompleted(resultSet.getBoolean("isCompleted"));
-                note.setDeadline(resultSet.getDate("deadline"));
                 note.setCreatedAt(resultSet.getDate("createdAt"));
                 note.setModifiedAt(resultSet.getDate("modifiedAt"));
                 
